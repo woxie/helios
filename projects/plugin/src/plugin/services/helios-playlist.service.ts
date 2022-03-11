@@ -44,8 +44,8 @@ export class HeliosPlaylistService {
 
     if (kodiOpenMedia) {
       const openMedia: OpenMedia = {
-        episodeNumber: kodiOpenMedia?.episode?.number,
-        seasonNumber: kodiOpenMedia?.episode?.seasonNumber,
+        episode: kodiOpenMedia?.episode?.number,
+        season: kodiOpenMedia?.episode?.seasonNumber,
         movieIds: kodiOpenMedia?.movie?.ids,
         showIds: kodiOpenMedia?.show?.ids
       };
