@@ -1,8 +1,8 @@
 {
   "$schema": "../../../node_modules/@wako-app/mobile-sdk/dist/manifest-schema.json",
   "version": "4.2.1",
-  "id": "plugin.helios",
-  "name": "Helios",
+  "id": "plugin.heliostest",
+  "name": "Heliostest",
   "description": "Helios is a source finder, it scrapes third-party sites (called providers) that are publicly available on the internet.",
   "author": "Davy",
   "actions": ["movies", "episodes", "episodes-item-option", "file-explorer"],
