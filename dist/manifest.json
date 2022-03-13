@@ -1,10 +1,10 @@
 {
   "$schema": "../../../node_modules/@wako-app/mobile-sdk/dist/manifest-schema.json",
-  "version": "4.2.1",
+  "version": "4.2.2",
   "id": "plugin.heliostest",
   "name": "Heliostest",
   "description": "Helios is a source finder, it scrapes third-party sites (called providers) that are publicly available on the internet.",
-  "author": "Davy",
+  "author": "wox",
   "actions": ["movies", "episodes", "episodes-item-option", "file-explorer"],
   "entryPointV2": "https://raw.githubusercontent.com/woxie/helios/master/dist/plugin.js",
   "entryPoint": "https://raw.githubusercontent.com/woxie/helios/old-wako/dist/plugin.js",
