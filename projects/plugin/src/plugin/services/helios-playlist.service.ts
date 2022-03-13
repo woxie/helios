@@ -45,7 +45,7 @@ export class HeliosPlaylistService {
     if (kodiOpenMedia) {
       const openMedia: OpenMedia = {
         episode: kodiOpenMedia?.episode?.number,
-        season: kodiOpenMedia?.episode?.seasonNumber,
+        season: kodiOpenMedia?.episode?.season,
         movieIds: kodiOpenMedia?.movie?.ids,
         showIds: kodiOpenMedia?.show?.ids
       };
@@ -57,7 +57,7 @@ export class HeliosPlaylistService {
           poster = kodiOpenMedia.movie.imagesUrl.poster;
         }
       } else if (kodiOpenMedia.show) {
-        label = kodiOpenMedia.show.title + ' S' + kodiOpenMedia.episode.seasonNumber.toString().padStart(2, '0');
+        label = kodiOpenMedia.show.title + ' S' + kodiOpenMedia.episode.season.toString().padStart(2, '0');
         if (kodiOpenMedia.show.imagesUrl) {
           poster = kodiOpenMedia.show.imagesUrl.poster;
         }
@@ -105,11 +105,11 @@ export class HeliosPlaylistService {
 
     let id = this.playListService.getPlaylistIdFromOpenMedia(openMedia);
 
-    if (openMedia.seasonNumber) {
-      id += `_S${openMedia.seasonNumber}`;
+    if (openMedia.season) {
+      id += `_S${openMedia.season}`;
     }
-    if (openMedia.episodeNumber) {
-      id += `_E${openMedia.episodeNumber}`;
+    if (openMedia.episode) {
+      id += `_E${openMedia.episode}`;
     }
 
     return id;
