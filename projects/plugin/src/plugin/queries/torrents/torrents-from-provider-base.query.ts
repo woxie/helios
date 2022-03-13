@@ -329,8 +329,8 @@ export abstract class TorrentsFromProviderBaseQuery {
         imdbId: query.imdbId ? query.imdbId : '',
         episodeCode: sourceQuery.episode ? sourceQuery.episode.episodeCode.toLowerCase() : '',
         seasonCode: sourceQuery.episode ? sourceQuery.episode.seasonCode.toLowerCase() : '',
-        season: sourceQuery.episode ? sourceQuery.episode.seasonNumber.toString() : '',
-        episode: sourceQuery.episode ? sourceQuery.episode.episodeNumber.toString() : '',
+        season: sourceQuery.episode ? sourceQuery.episode.season.toString() : '',
+        episode: sourceQuery.episode ? sourceQuery.episode.episode.toString() : '',
         absoluteNumber: sourceQuery.episode && sourceQuery.episode.absoluteNumber ? sourceQuery.episode.absoluteNumber.toString() : '',
 
         query: ''
