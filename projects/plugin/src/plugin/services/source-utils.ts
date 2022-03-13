@@ -190,7 +190,7 @@ export class SourceUtils {
     return false;
   }
 
-  static checkEpisodeNumberMatch(releaseTitle: string) {
+  static checkepisodeMatch(releaseTitle: string) {
     releaseTitle = this.cleanTitle(releaseTitle);
 
     return releaseTitle.match(/(s\d+e[a-z]*\d+ )|(s\d+ *e\d+ )|(season \d+ episode \d+)/gi) !== null;
@@ -297,8 +297,8 @@ export class SourceUtils {
   static isEpisodeTitleMatching(releaseTitle: string, searchQuery: string, sourceQuery: SourceEpisodeQuery) {
     const showTitle = sourceQuery.title;
     const episodeTitle = sourceQuery.episodeTitle;
-    const season = sourceQuery.seasonNumber;
-    const episode = sourceQuery.episodeNumber;
+    const season = sourceQuery.season;
+    const episode = sourceQuery.episode;
     const absoluteNumber = sourceQuery.absoluteNumber;
 
     const seasonEpisodeCheck = `s${season}e${episode}`;
@@ -346,13 +346,13 @@ export class SourceUtils {
   }
 
   static isSeasonPackTitleMatching(releaseTitle: string, searchQuery: string, sourceQuery: SourceEpisodeQuery) {
-    const episodeNumberMatch = this.checkEpisodeNumberMatch(releaseTitle);
-    if (episodeNumberMatch) {
+    const episodeMatch = this.checkepisodeMatch(releaseTitle);
+    if (episodeMatch) {
       return false;
     }
 
     const showTitle = sourceQuery.title;
-    const season = sourceQuery.seasonNumber;
+    const season = sourceQuery.season;
 
     const seasonFill = add0(season);
     const seasonCheck = `s${season} `;
@@ -386,7 +386,7 @@ export class SourceUtils {
         if (this.isWordMatching(releaseTitle, title + ' ' + code)) {
           if (
             (code === seasonFullPack || code === seasonFullPackFull) &&
-            !this.isMatchingFullPack(releaseTitle, sourceQuery.seasonNumber, code)
+            !this.isMatchingFullPack(releaseTitle, sourceQuery.season, code)
           ) {
             continue;
           }
@@ -396,7 +396,7 @@ export class SourceUtils {
         if (this.isTitleMatching(releaseTitle, title + ' ' + code, sourceQuery, code.substr(-1, 1) === ' ')) {
           if (
             (code === seasonFullPack || code === seasonFullPackFull) &&
-            !this.isMatchingFullPack(releaseTitle, sourceQuery.seasonNumber, code)
+            !this.isMatchingFullPack(releaseTitle, sourceQuery.season, code)
           ) {
             continue;
           }
@@ -408,20 +408,20 @@ export class SourceUtils {
     return false;
   }
 
-  static isMatchingFullPack(releaseTitle: string, seasonNumber: number, fullPackCode: string) {
-    let maxSeasonNumber = 0;
+  static isMatchingFullPack(releaseTitle: string, season: number, fullPackCode: string) {
+    let maxseason = 0;
     if (fullPackCode === 'season 1-') {
       const matches = releaseTitle.match(/season 1-([0-9]+)/i);
       if (matches && matches[1]) {
-        maxSeasonNumber = +matches[1];
+        maxseason = +matches[1];
       }
     } else if (fullPackCode === 'S01-') {
       const matches = releaseTitle.match(/S01-S([0-9]+)/i);
       if (matches && matches[1]) {
-        maxSeasonNumber = +matches[1];
+        maxseason = +matches[1];
       }
     }
-    return seasonNumber < maxSeasonNumber;
+    return season < maxseason;
   }
 
   static getVideoMetadata(releaseTitle: string, sourceQuery: SourceQuery) {
