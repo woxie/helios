@@ -9,8 +9,8 @@ export class SourceMovieQuery {
 }
 
 export class SourceEpisodeQuery extends SourceMovieQuery {
-  episodeNumber: number;
-  seasonNumber: number;
+  episode: number;
+  season: number;
   episodeCode: string;
   seasonCode: string;
   episodeTitle: string;
