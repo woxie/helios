@@ -284,10 +284,10 @@ export function getSourceQueryMovie(movie: Movie) {
 export function getSourceQueryEpisode(show: Show, episode: Episode, absoluteNumber?: number) {
   const sourceEpisodeQuery = new SourceEpisodeQuery();
 
-  sourceEpisodeQuery.episodeNumber = episode.number;
-  sourceEpisodeQuery.seasonNumber = episode.seasonNumber;
+  sourceEpisodeQuery.episode = episode.number;
+  sourceEpisodeQuery.season = episode.season;
   sourceEpisodeQuery.episodeCode = episode.code;
-  sourceEpisodeQuery.seasonCode = 'S' + add0(episode.seasonNumber).toString();
+  sourceEpisodeQuery.seasonCode = 'S' + add0(episode.season).toString();
   sourceEpisodeQuery.trakId = episode.ids.trakt;
   sourceEpisodeQuery.imdbId = episode.ids.imdb;
   sourceEpisodeQuery.tvdbId = episode.ids.tvdb;
@@ -308,8 +308,8 @@ export function getSourceQueryEpisode(show: Show, episode: Episode, absoluteNumb
   return { episode: sourceEpisodeQuery, category: sourceEpisodeQuery.isAnime ? 'anime' : 'tv' } as SourceQuery;
 }
 
-export function getEpisodeCode(seasonNumber: number, episodeNumber: number) {
-  return 'S' + add0(seasonNumber) + 'E' + add0(episodeNumber);
+export function getEpisodeCode(season: number, episode: number) {
+  return 'S' + add0(season) + 'E' + add0(episode);
 }
 
 export function incrementEpisodeCode(episodeCode: string) {
@@ -336,8 +336,8 @@ export function addToKodiPlaylist(videoUrls: string[], kodiOpenMedia: KodiOpenMe
       const openMedia: OpenMedia = {
         movieIds: kodiOpenMedia.movie ? kodiOpenMedia.movie.ids : null,
         showIds: kodiOpenMedia.show.ids ? kodiOpenMedia.show.ids : null,
-        seasonNumber: kodiOpenMedia.episode ? kodiOpenMedia.episode.seasonNumber : null,
-        episodeNumber: startEpisode ? startEpisode : null
+        season: kodiOpenMedia.episode ? kodiOpenMedia.episode.season : null,
+        episode: startEpisode ? startEpisode : null
       };
 
       items.push({
@@ -366,8 +366,8 @@ export function getElementumUrlBySourceUrl(sourceUrl: string, sourceQuery?: Sour
     }
     if (sourceQuery.episode) {
       urlSearchParams.set('show', sourceQuery.episode.showTmdbId.toString());
-      urlSearchParams.set('season', sourceQuery.episode.seasonNumber.toString());
-      urlSearchParams.set('episode', sourceQuery.episode.episodeNumber.toString());
+      urlSearchParams.set('season', sourceQuery.episode.season.toString());
+      urlSearchParams.set('episode', sourceQuery.episode.episode.toString());
     }
   }
 
@@ -392,8 +392,8 @@ export function getOpenMediaFromKodiOpenMedia(kodiOpenMedia: KodiOpenMedia) {
   const openMedia: OpenMedia = {
     movieIds: kodiOpenMedia.movie ? kodiOpenMedia.movie.ids : null,
     showIds: kodiOpenMedia.show ? kodiOpenMedia.show.ids : null,
-    seasonNumber: kodiOpenMedia.episode ? kodiOpenMedia.episode.seasonNumber : null,
-    episodeNumber: kodiOpenMedia.episode ? kodiOpenMedia.episode.number : null
+    season: kodiOpenMedia.episode ? kodiOpenMedia.episode.season : null,
+    episode: kodiOpenMedia.episode ? kodiOpenMedia.episode.number : null
   };
   return openMedia;
 }
