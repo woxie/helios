@@ -213,7 +213,7 @@
   "source-list": {
     "noProviderSet": "No providers set",
     "noProviderSetCategory": "No providers set for category: {{category}}",
-    "manualFilter": "Search from results"
+    "manualFilter": "Search from resultss"
   },
   "open-button": {
     "more": "Sources List"
@@ -222,7 +222,7 @@
     "segments": {
       "debrid": "Streams",
       "torrents": "Torrents",
-      "stats": "Stats"
+      "stats": "Statss"
     },
     "statsInfo": "Note: Duplicated torrents are removed from the torrents list",
     "addToQueue": "{{totalEpisode}} next episodes have been queued"
