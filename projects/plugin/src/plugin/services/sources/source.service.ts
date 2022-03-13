@@ -195,13 +195,13 @@ export class SourceService {
     if (!sourceQuery.episode || !sourceQuery.episode.isAnime || sourceQuery.episode.absoluteNumber > 0) {
       return of(null);
     }
-    return TmdbSeasonGetByIdForm.submit(sourceQuery.episode.showTmdbId, sourceQuery.episode.seasonNumber).pipe(
+    return TmdbSeasonGetByIdForm.submit(sourceQuery.episode.showTmdbId, sourceQuery.episode.season).pipe(
       catchError(() => {
         return EMPTY;
       }),
       map((tmdbSeason) => {
         tmdbSeason.episodes.forEach((episode) => {
-          if (episode.episode_number === sourceQuery.episode.seasonNumber) {
+          if (episode.episode_number === sourceQuery.episode.season) {
             sourceQuery.episode.absoluteNumber = episode.production_code;
           }
         });
@@ -340,7 +340,7 @@ export class SourceService {
   }
 
   getNextEpisodeSources(sourceQuery: SourceQuery, type?: 'torrent' | 'stream') {
-    let limit = sourceQuery.episode.latestAiredEpisode - sourceQuery.episode.episodeNumber;
+    let limit = sourceQuery.episode.latestAiredEpisode - sourceQuery.episode.episode;
 
     if (limit > 3) {
       limit = 3;
@@ -349,7 +349,7 @@ export class SourceService {
     const obss: Observable<{ source: TorrentSource | StreamLinkSource; sourceQuery: SourceQuery }>[] = [];
     let episodeCode = sourceQuery.episode.episodeCode;
     let episodeAbsoluteNumber = sourceQuery.episode.absoluteNumber;
-    let episodeNumber = sourceQuery.episode.episodeNumber;
+    let episode = sourceQuery.episode.episode;
 
     for (let i = 0; i < limit; i++) {
       const _sourceQuery = JSON.parse(JSON.stringify(sourceQuery));
@@ -359,8 +359,8 @@ export class SourceService {
         episodeAbsoluteNumber++;
         _sourceQuery.episode.absoluteNumber = episodeAbsoluteNumber;
       }
-      episodeNumber++;
-      _sourceQuery.episode.episodeNumber = episodeNumber;
+      episode++;
+      _sourceQuery.episode.episode = episode;
 
       _sourceQuery.episode.episodeCode = episodeCode;
 
